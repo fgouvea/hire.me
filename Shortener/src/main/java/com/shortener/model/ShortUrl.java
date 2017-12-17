@@ -10,21 +10,17 @@ import javax.persistence.Column;
 public class ShortUrl {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private String alias;
 	
 	@Column(nullable = false)
 	private String url;
 	
-	@Column(nullable = false)
-	private String alias;
-	
-	public Integer getId() {
-		return this.id;
+	public String getAlias() {
+		return this.alias;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public void setAlias(String alias) {
+		this.alias = alias;
 	}
 	
 	public String getUrl() {
@@ -33,13 +29,5 @@ public class ShortUrl {
 	
 	public void setUrl(String url) {
 		this.url = url;
-	}
-	
-	public String getAlias() {
-		return this.alias;
-	}
-	
-	public void setAlias(String alias) {
-		this.alias = alias;
 	}
 }
