@@ -8,12 +8,19 @@ import javax.persistence.Column;
 
 @Entity
 public class ShortUrl {
-
+	
 	@Id
 	private String alias;
 	
 	@Column(nullable = false)
 	private String url;
+	
+	public ShortUrl() { }
+	
+	public ShortUrl(String alias, String url) {
+		this.alias = alias;
+		this.url = url;
+	}
 	
 	public String getAlias() {
 		return this.alias;
