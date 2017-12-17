@@ -79,7 +79,9 @@ public class ShortUrlControllerTest {
 		this.mockMvc.perform(post("/create?url=http://www.google.com&alias=google"))
 					.andExpect(status().isOk())
 					.andExpect(jsonPath("$.alias", is("google")))
-					.andExpect(jsonPath("$.url", is("http://www.google.com")));
+					.andExpect(jsonPath("$.url", is("http://www.google.com")))
+					.andExpect(jsonPath("$.statistics", is(notNullValue())))
+					.andExpect(jsonPath("$.statistics.time_taken", is(notNullValue())));
 		
 		assertTrue(shortUrlRepository.exists("google"));
 	}
@@ -108,6 +110,8 @@ public class ShortUrlControllerTest {
 		MvcResult result = this.mockMvc.perform(post("/create?url=http://www.youtube.com"))
 									   .andExpect(status().isOk())
 									   .andExpect(jsonPath("$.alias", is(notNullValue())))
+									   .andExpect(jsonPath("$.statistics", is(notNullValue())))
+									   .andExpect(jsonPath("$.statistics.time_taken", is(notNullValue())))
 									   .andReturn();
 		
 		String json = result.getResponse().getContentAsString();

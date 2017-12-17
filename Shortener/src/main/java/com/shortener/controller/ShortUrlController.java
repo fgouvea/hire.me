@@ -16,6 +16,7 @@ import com.shortener.vo.ErrorVO;
 import com.shortener.vo.ResultVO;
 import com.shortener.vo.RetrieveUrlVO;
 import com.shortener.vo.ShortenUrlVO;
+import com.shortener.vo.StatisticsVO;
 
 @RestController
 public class ShortUrlController {
@@ -43,6 +44,8 @@ public class ShortUrlController {
 							   @RequestParam(value="alias", required=false) String alias,
 							   HttpServletResponse response ) {
 		
+		long startTime = System.currentTimeMillis();
+		
 		/* Tratando esse caso explicitamente em vez de usar required=true no parâmetro
 		   para poder retornar um erro explicando o problema. */
 		if (url == null) {
@@ -60,7 +63,10 @@ public class ShortUrlController {
 		ShortUrl shortUrl = new ShortUrl(alias, url);
 		shortUrlRepository.save(shortUrl);
 		
-		return new ShortenUrlVO(alias, url);
+		long endTime = System.currentTimeMillis();
+		StatisticsVO statistics = new StatisticsVO(endTime - startTime);
+		
+		return new ShortenUrlVO(alias, url, statistics);
 		
 	}
 	
