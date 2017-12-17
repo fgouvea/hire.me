@@ -62,7 +62,16 @@ public class ShortUrlControllerTest {
 					.andExpect(status().isNotFound())
 					.andExpect(jsonPath("$.err_code", is("002")))
 					.andExpect(jsonPath("$.description", is("SHORTENED URL NOT FOUND")));
-		}
+	}
+	
+	// Pesquisa por um alias com case errado e espera um erro. (Teste de regressão)
+	@Test
+	public void getByAlias_CaseInsensitive_ShouldReturnError() throws Exception {
+		this.mockMvc.perform(get("/BEMOBI"))
+					.andExpect(status().isNotFound())
+					.andExpect(jsonPath("$.err_code", is("002")))
+					.andExpect(jsonPath("$.description", is("SHORTENED URL NOT FOUND")));
+	}
 	
 	// Encurta uma url com um alias válido.
 	@Test

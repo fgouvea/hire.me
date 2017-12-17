@@ -4,11 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.Column;
 
 @Entity
 public class ShortUrl {
 	
+	@Column(columnDefinition = "VARBINARY(255)")
 	@Id
 	private String alias;
 	
