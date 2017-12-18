@@ -5,27 +5,27 @@ import LayoutComponent from './LayoutComponent';
 class RedirectComponent extends Component {
   constructor() {
     super();
-    this.state = {error: null};
+    this.state = {};
   }
 
   componentWillMount() {
+    // Faz requisição a API.
     axios.get('/' + this.props.match.params.alias).then((response) => {
-      if ('url' in response.data) {
-        // Redireciona para a URL original encurtada
-        window.location.href = response.data.url;
-      }
+      this.redirect(response.data.url);
     }).catch((error) => {
-        this.setState({error: error.response.data});
+      this.setState({error: error.response.data});
     });
   }
 
+  redirect(url) {
+    window.location.href = url;
+  }
+
   render() {
-    if (this.state.error === null) {
-      return "";
+    if (this.state.error) {
+      return <LayoutComponent error={this.state.error}/>
     } else {
-      return (
-        <LayoutComponent error={this.state.error}/>
-      )
+      return null;
     }
   }
 }
