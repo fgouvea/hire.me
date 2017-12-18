@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import { FormControl, FormGroup, ControlLabel, InputGroup, Button } from 'react-bootstrap';
+
 import InfoComponent from './InfoComponent';
 import ErrorComponent from './ErrorComponent';
+import '../css/ShortenUrl.css'
 
 class ShortenUrlComponent extends Component {
 
@@ -48,6 +51,8 @@ class ShortenUrlComponent extends Component {
     });
   }
 
+
+
   getErrorLabel() {
     if (this.state.error) {
       return <ErrorComponent error={this.state.error} />
@@ -59,15 +64,36 @@ class ShortenUrlComponent extends Component {
   getShortenForm() {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <label>
-          URL:
-          <input type="text" name="url" value={this.state.url} onChange={this.handleInputChange.bind(this)}  />
-        </label>
-        <label>
-          Alias:
-          <input type="text" name="alias" value={this.state.alias} onChange={this.handleInputChange.bind(this)}  />
-        </label>
-        <input type="submit" value="Shorten!"/>
+
+        <FormGroup>
+          <ControlLabel>URL:</ControlLabel>
+          <FormControl
+          type="text"
+          name="url"
+          placeholder="Ex: http://www.google.com"
+          value={this.state.url}
+          onChange={this.handleInputChange.bind(this)}
+          required="true"
+          />
+        </FormGroup>
+
+        <FormGroup>
+          <ControlLabel>Custom alias:</ControlLabel>
+          <InputGroup>
+            <InputGroup.Addon>{window.location.href}</InputGroup.Addon>
+            <FormControl
+            type="text"
+            name="alias"
+            placeholder="(optional)"
+            value={this.state.alias}
+            onChange={this.handleInputChange.bind(this)}
+            />
+          </InputGroup>
+        </FormGroup>
+
+        <Button type="submit" bsStyle="primary" className="shorten-button">
+          Shorten!
+        </Button>
 
         { this.getErrorLabel() }
       </form>

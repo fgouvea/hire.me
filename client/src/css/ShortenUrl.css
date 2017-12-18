@@ -1,0 +1,7 @@
+.shorten-button {
+  margin-top: 5px;
+}
+
+.shorten-button + div {
+  margin-top: 10px;
+}
