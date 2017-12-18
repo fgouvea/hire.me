@@ -64,7 +64,7 @@ public class RetrieveUrlTest {
 					.andExpect(jsonPath("$.description", is("SHORTENED URL NOT FOUND")));
 	}
 	
-	// Pesquisa por um alias existente e recebe um json com a URL.
+	// Pesquisa por um alias e verifica se a contagem de views foi incrementada.
 	@Test
 	public void viewCount_ShouldIncrementAfterRetrieval() throws Exception {
 		this.mockMvc.perform(get("/bemobi"))
