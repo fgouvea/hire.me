@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
+import ShortenUrlComponent from './ShortenUrlComponent';
+import ErrorComponent from './ErrorComponent';
 
-class RedirectComponent extends Component {
+class LayoutComponent extends Component {
 
   getContent() {
     if ('error' in this.props) {
-      return this.getErrorPanel();
+      return <ErrorComponent error={this.props.error} />;
     } else {
-      return "";
+      return <ShortenUrlComponent/>;
     }
-  }
-
-  getErrorPanel() {
-    return <p> {this.props.error.err_code}: {this.props.error.description} </p>
   }
 
   render() {
@@ -26,4 +24,4 @@ class RedirectComponent extends Component {
   }
 }
 
-export default RedirectComponent;
+export default LayoutComponent;
