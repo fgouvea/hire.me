@@ -28,7 +28,10 @@ public class RetrieveUrlController {
 		if (url == null) {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return ErrorVO.URL_NOT_FOUND;
-		} else {			
+		} else {
+			url.incrementViews();
+			shortUrlRepository.save(url);
+			
 			return new RetrieveUrlVO(url.getUrl());
 		}
 	}

@@ -1,6 +1,7 @@
 package com.shortener.controller;
 
 import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -61,5 +62,15 @@ public class RetrieveUrlTest {
 					.andExpect(status().isNotFound())
 					.andExpect(jsonPath("$.err_code", is("002")))
 					.andExpect(jsonPath("$.description", is("SHORTENED URL NOT FOUND")));
+	}
+	
+	// Pesquisa por um alias existente e recebe um json com a URL.
+	@Test
+	public void viewCount_ShouldIncrementAfterRetrieval() throws Exception {
+		this.mockMvc.perform(get("/bemobi"))
+					.andExpect(status().isOk());
+		
+		ShortUrl url = shortUrlRepository.findOne("bemobi");
+		assertEquals(1, url.getViews());
 	}
 }

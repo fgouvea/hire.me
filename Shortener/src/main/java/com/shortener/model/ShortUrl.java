@@ -19,11 +19,16 @@ public class ShortUrl {
 	@Column(nullable = false)
 	private String url;
 	
-	public ShortUrl() { }
+	private int views;
+	
+	public ShortUrl() {
+		this.views = 0;
+	}
 	
 	public ShortUrl(String alias, String url) {
 		this.alias = alias;
 		this.url = url;
+		this.views = 0;
 	}
 	
 	public String getAlias() {
@@ -40,5 +45,17 @@ public class ShortUrl {
 	
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public int getViews() {
+		return views;
+	}
+	
+	public void setViews(int views) {
+		this.views = views;
+	}
+	
+	public void incrementViews() {
+		this.views++;
 	}
 }
