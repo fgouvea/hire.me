@@ -31,10 +31,12 @@ class Top10Component extends Component {
   }
 
   getUrlRow(url, index) {
+    const shortenerLink = window.location.href + url.alias;
+    
     return (
       <tr key={'url' + index}>
         <th>{index + 1}</th>
-        <th><a href={url.url}>{window.location.href + url.alias}</a></th>
+        <th><a href={shortenerLink}>{shortenerLink}</a></th>
         <th>{url.url}</th>
         <th>{url.views}</th>
       </tr>
